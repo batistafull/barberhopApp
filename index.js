@@ -4,6 +4,10 @@ const app = express();
 const archivo = __dirname + '/db/model.json';
 
 
+app.get('/', (req, res) => {
+        res.send('API REST');
+});
+
 app.get('/:nombre/:tel/:service', (req, res) => {
     var user = '';
     fs.readFile(archivo, 'utf-8', (err, data) => {
@@ -20,6 +24,11 @@ app.get('/:nombre/:tel/:service', (req, res) => {
             res.send(user)
         });
     })
+});
+app.get('/reset', (req, res) => {
+    fs.writeFile(archivo, '[]', (err) =>{
+        res.send('Lista reiniciada <br /> <a href="/">volver</a>');
+    });
 });
 
 app.listen(process.env.PORT || 5000, () => {
