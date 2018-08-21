@@ -8,6 +8,14 @@ app.get('/', (req, res) => {
         res.send('API REST');
 });
 
+app.get('/data', (req, res) => {
+    var user = '';
+    fs.readFile(archivo, 'utf-8', (err, data) => {
+        user = JSON.stringify(data);
+        res.send(user)
+    });
+});
+
 app.get('/:nombre/:tel/:service', (req, res) => {
     var user = '';
     fs.readFile(archivo, 'utf-8', (err, data) => {
@@ -25,6 +33,7 @@ app.get('/:nombre/:tel/:service', (req, res) => {
         });
     })
 });
+
 app.get('/reset', (req, res) => {
     fs.writeFile(archivo, '[]', (err) =>{
         res.send('Lista reiniciada <br /> <a href="/">volver</a>');
