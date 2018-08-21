@@ -11,8 +11,7 @@ app.get('/', (req, res) => {
 app.get('/data', (req, res) => {
     var user = '';
     fs.readFile(archivo, 'utf-8', (err, data) => {
-        user = JSON.stringify(data);
-        res.send(user)
+        res.send(data)
     });
 });
 
